@@ -1,0 +1,47 @@
+@model IEnumerable<PresseMots.Models.Story>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <h2> @Html.DisplayFor(modelItem => item.Title) par  @Html.DisplayFor(modelItem => item.Owner.Username)</h2>
+                @if (item.PublishTime != null)
+                {
+                    <div class="badge badge-light">
+                        Publi&eacute; le @Html.DisplayFor(modelItem => item.PublishTime)
+                    </div>
+                }
+            </div>
+            <div class="card-text" >
+                @Html.DisplayFor(modelItem => item.Content)
+            </div>
+            <div class="panel-footer">
+
+                <div class="badge badge-info">
+                    Cr&eacute;&eacute; le @Html.DisplayFor(modelItem => item.CreationTime)
+                </div>
+                @if (item.CreationTime != null)
+                {
+                    <div class="badge badge-dark">
+                        &Eacute;dit&eacute; le @Html.DisplayFor(modelItem => item.CreationTime)
+                    </div>
+                }
+
+                <hr />
+                <a asp-action="Index" asp-route-storyId="@item.Id" asp-controller="Comments">@item.Comments.Where(x => !x.Hidden).Count() commentaire(s)</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </div>
+        </div>
+    </div>
+    <br/>
+}
+
+<p>
+    <a asp-action="Create">Nouvel article</a>
+</p>
