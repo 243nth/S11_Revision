@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PresseMots.Models;
 using PresseMots.Models.Data;
 
 namespace PresseMots.Controllers
@@ -17,7 +19,7 @@ namespace PresseMots.Controllers
         // GET: Tags
         public async Task<IActionResult> Index()
         {
-              return View(/*...*/);
+              return View(_context.Tags.ToList());
         }
 
         // GET: Tags/Create
@@ -31,21 +33,22 @@ namespace PresseMots.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Object model/*[Bind("Id,Name")] Tag tag*/)
+        public async Task<IActionResult> Create(Object model ,[Bind("Id,Name")] Tags tag)
         {
             if (ModelState.IsValid)
             {
-                /*?*/
+                model = _context.Tags.Add(tag);
             }
-            return View(/*...*/);
+            return View(model);
         }
 
         // GET: Tags/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-           /*..?*/
+         var jsp=   _context.Tags.FirstOrDefault(i => i.Id == id);
 
-            return View(/*..*/);
+           
+            return View(jsp);
         }
 
         // POST: Tags/Delete/5
