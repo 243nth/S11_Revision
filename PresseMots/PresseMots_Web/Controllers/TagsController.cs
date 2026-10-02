@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PresseMots.Models;
 using PresseMots.Models.Data;
 
@@ -45,7 +46,11 @@ namespace PresseMots.Controllers
         // GET: Tags/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-         var jsp=   _context.Tags.FirstOrDefault(i => i.Id == id);
+         var jsp= await  _context.Tags.FirstOrDefaultAsync(i => i.Id == id);
+            if (jsp==null)
+            {
+                NotFound();
+            }
 
            
             return View(jsp);
@@ -56,8 +61,9 @@ namespace PresseMots.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            /*...*/
-
+            var jspIgo = await _context.Tags.FirstOrDefaultAsync(i=>i.Id==id);
+              _context.Tags.Remove(jspIgo);
+          await   _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

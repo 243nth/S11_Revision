@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PresseMots.Models
@@ -9,12 +10,12 @@ namespace PresseMots.Models
         public int id { get; set; }
 
         public int StoryId { get; set; }
-        public virtual Story Story { get; set; }
+        public virtual IList<Story> Stories { get; set; }
 
    
         public int TagId { get; set; }
 
-        public virtual Tags Tag { get;set; }
+        public virtual IList<Tags> Tags { get;set; }
 
     }
 }

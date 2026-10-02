@@ -12,16 +12,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tag)
+            @Html.DisplayNameFor(model => model.Tags)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tag.Name)
+            @Html.DisplayFor(model => model.Tags)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Story)
+            @Html.DisplayNameFor(model => model.Stories)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Story.Title)
+            @Html.DisplayFor(model => model.Stories)
         </dd>
     </dl>
     
@@ -29,5 +29,6 @@
         <input type="hidden" asp-for="id" />
         <input type="submit" value="Supprimer" class="btn btn-danger" /> &nbsp;
           <a asp-action="Index" asp-controller="Stories" asp-route-Id="@Model.StoryId">&laquo; Retour</a>
+        <partial name="_tags" />
     </form>
 </div>
